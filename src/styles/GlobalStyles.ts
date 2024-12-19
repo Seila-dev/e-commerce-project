@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
         --roxo-claro: #6528D3;
         --roxo-escuro: #130234;
         --roxo-hover: rgb(78, 32, 163);
+        --green: #6BB27C;
     }
 
 

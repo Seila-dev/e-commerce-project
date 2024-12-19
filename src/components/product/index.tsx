@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { GenericButton } from "../button"
 
 export const Product = (props: any) => {
 
@@ -9,12 +10,14 @@ export const Product = (props: any) => {
             </div>
             <ProductInfo>
                 <h3>{props.title}</h3>
-                <p>Cor: {props.color}</p>
+                <p className="color">Cor: {props.color}</p>
                 <p>Tamanho: {props.size}</p>
-                <div>
-                    <p>R$ {props.price}</p>
+                <div className="price-div">
+                    <p className="price">R$ {props.price}</p>
                 </div>
-                <Button>Adicionar ao carrinho</Button>
+                <div className="add-item-div">
+                    <GenericButton>Adicionar ao carrinho</GenericButton>
+                </div>
             </ProductInfo>
         </ProductContainer>
     )
@@ -35,19 +38,28 @@ const Image = styled.img`
 
 const ProductInfo = styled.div`
     background-color: var(--roxo-escuro);
-    padding: 20px;
-`
+    padding: 30px 20px;
+    .color{
+        margin: 20px 0 5px 0;
+    }
+    .price-div {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .price-div .price{
+        margin: 30px 0 10px 0;
+        font-size: 24px;
+        color: var(--green);
+        font-weight: 500;
+    }
+    
+    .add-item-div{
+        width: 100%;
+        background: blue;
+    }
 
-const Button = styled.button`
-    background-color: var(--roxo-claro);
-    color: #fff;
-    padding: 12px 30px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    transition: 0.1s ease-in-out;
-    width: 100%;
-    &:hover{
-        background-color: var(--roxo-hover);
+    .add-item-div button{
+        width: 100%;
+        margin: 0;
     }
 `
