@@ -1,6 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+    :root{
+        --roxo-claro: #6528D3;
+        --roxo-escuro: #130234;
+        --roxo-hover: rgb(78, 32, 163);
+    }
+
+
     *{
         margin: 0;
         padding: 0;

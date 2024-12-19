@@ -1,6 +1,7 @@
 import Logo from '../../assets/logo.png';
 import Cart from '../../assets/cart.png'
 
+import { GenericButton } from '../button';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -29,7 +30,9 @@ export const Header = () => {
                         <li>Fale conosco</li>
                     </Link>
                 </Ul>
-                <LoginBtn>Entrar ou cadastrar-se</LoginBtn>
+                <GenericButton>
+                    Entrar ou cadastrar-se
+                </GenericButton>
                 <CartImage src={Cart} alt="Cart" />
             </Nav>
         </HeaderElement>
@@ -70,19 +73,19 @@ const Ul = styled.ul`
     }
 `
 
-const LoginBtn = styled.button`
-    margin-left: 30px;
-    background-color: #6528D3;
-    color: #fff;
-    padding: 12px 30px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    transition: 0.1s ease-in-out;
-    &:hover{
-        background-color:rgb(78, 32, 163);
-    }
-`
+// const LoginBtn = styled.button`
+//     margin-left: 30px;
+//     background-color: #6528D3;
+//     color: #fff;
+//     padding: 12px 30px;
+//     cursor: pointer;
+//     border: none;
+//     border-radius: 4px;
+//     transition: 0.1s ease-in-out;
+//     &:hover{
+//         background-color:rgb(78, 32, 163);
+//     }
+// `
 
 const CartImage = styled.img`
     width: 25px;
