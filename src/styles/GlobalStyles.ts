@@ -2,10 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     :root{
-        --roxo-claro: #6528D3;
-        --roxo-escuro: #130234;
-        --roxo-hover: rgb(78, 32, 163);
+        --light-purple: #6528D3;
+        --dark-purple: #130234;
+        --hover-purple: rgb(78, 32, 163);
         --green: #6BB27C;
+        --almost-black: #111111;
     }
 
 
@@ -18,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body{
-        background: #111111;
+        background: var(--almost-black);
         color: #ffffff;
         font-family: "Roboto", sans-serif;
     }

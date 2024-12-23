@@ -78,7 +78,7 @@ const FooterElement = styled.footer`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: #130234;
+    background: var(--dark-purple);
 `
 
 const FlexContainer = styled.div`
@@ -89,12 +89,12 @@ const FlexContainer = styled.div`
     
     li{
         margin: 15px 0;
-        color: #6528D3;
-        border-bottom: 1px solid #130234;
+        color: var(--light-purple);
+        border-bottom: 1px solid var(--dark-purple);
         width: fit-content;
     }
     li: hover{
-        border-bottom: 1px solid #6528D3;
+        border-bottom: 1px solid var(--light-purple);
     }
     h2{
         font-size: 20px;
@@ -102,7 +102,7 @@ const FlexContainer = styled.div`
 `
 
 const CopyrightContainer = styled.div`
-    background: #6528D3;
+    background: var(--light-purple);
     width: 100%;
     text-align: center;
     padding: 20px;

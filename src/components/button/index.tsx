@@ -1,14 +1,20 @@
-import { ReactNode } from "react"
+import { ReactNode} from "react"
 import styled from "styled-components"
+import { ProductData } from "../../interfaces/ProductData";
 
 interface buttonProps {
     children: ReactNode;
-  }
+    onClick: (product: ProductData) => void;
+    product: ProductData; // Adicione o `product` aqui
+}
 
 export const GenericButton = (props: buttonProps) => {
+    // const { onClick, children, product } = props;
+    const { children } = props
+
     return (
-        <ButtonElement>
-            {props.children}
+        <ButtonElement >
+            {children}
         </ButtonElement>
     )
 }
