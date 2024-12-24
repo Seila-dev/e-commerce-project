@@ -1,20 +1,13 @@
 import Logo from '../../assets/logo.png';
 import Cart from '../../assets/cart.png'
 
-// import { GenericButton } from '../button';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../../contexts/CartContext';
 
 export const Header = () => {
     const { cart } = useContext(CartContext);
-    const [isCartVisible, setIsCartVisible] = useState<boolean>(false);
-
-    const toggleCartVisibility = () => {
-        setIsCartVisible(prevState => !prevState)
-    }
-
 
     return (
         <>
@@ -44,34 +37,13 @@ export const Header = () => {
                         Entrar ou cadastrar-se
                     </LoginBtn>
                     <div className="cart">
-                        <img src={Cart} alt="Cart" onClick={toggleCartVisibility} />
-                        {cart.length > 0 &&
-                            <div><span className='products-quantity'>{cart.length}</span></div>
-                        }
+                        <Link to="/cart">
+                            <img src={Cart} alt="Cart" />
+                            {cart.length > 0 &&
+                                <div><span className='products-quantity'>{cart.length}</span></div>
+                            }
+                        </Link>
                     </div>
-                    <CartContainer isVisible={isCartVisible}>
-                        {cart.length === 0 ? (
-                            <p>Não há compras no carrinho</p>
-                        ) : (
-                            cart.map((product, index) => (
-                                <div className="product" key={index}>
-                                    <div className="image">
-                                        <img src={product.image} alt="Imagem item" />
-                                    </div>
-                                    <div className='product-info'>
-                                        <h3>{product.name}</h3>
-                                        <p className="color">Cor: {product.color}</p>
-                                        <p>Tamanho: {product.size}</p>
-                                        <div className="price-div">
-                                            <p className="price">R$ {product.price}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        )}
-
-                    </CartContainer>
-
                 </Nav>
             </HeaderElement>
         </>
@@ -107,39 +79,6 @@ const HeaderElement = styled.header`
             font-size: 10px;
         }
     }
-`
-
-const CartContainer = styled.div<{ isVisible: boolean }>`
-position: absolute;
-    top: 60px;
-    right: 470px;
-    z-index: 9999;
-    background: var(--almost-black);
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--light-purple);
-    border-radius: 5px;
-    padding: 10px;
-    opacity: ${(props) => (props.isVisible ? 1 : 0)};
-    visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-    pointer-events: ${(props) => (props.isVisible ? 'auto' : 'none')};
-    transition: 0.15s ease-in-out;
-
-    .product{
-        display: flex;
-        align-items: center;
-        width: 100%;
-        padding: 10px;
-        img{
-            width: 75px;
-            border-radius: 5px;
-        }
-    }
-    .product-info{
-        display: flex;
-        flex-direction: column;
-        padding: 5px 10px;
-    }  
 `
 
 const LinkLogo = styled(Link)`
