@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         --hover-purple: rgb(78, 32, 163);
         --green: #6BB27C;
         --almost-black: #111111;
+        --white: #fff;
     }
 
 
@@ -22,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
         background: var(--almost-black);
         color: #ffffff;
         font-family: "Roboto", sans-serif;
+        min-width: 380px;
     }
 
     a{

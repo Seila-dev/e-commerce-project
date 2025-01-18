@@ -6,8 +6,6 @@ export interface Products extends ProductData {
     quantity: number
 }
 
-
-
 interface CartContextProps {
     cart: Products[];
     addProductIntoCart: (product: ProductData) => void

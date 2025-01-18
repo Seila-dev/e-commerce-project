@@ -8,71 +8,93 @@ interface ProductProps {
 }
 
 export const Product = ({ products }: ProductProps) => {
-    const { cart, addProductIntoCart } = useContext(CartContext)
-
-    console.log(cart)
-
+    const { addProductIntoCart } = useContext(CartContext)
 
     return (
-        <ProductContainer>
-            {products.map((product, index) => (
-                <div className="product" key={index}>
-                    <div className="image">
-                        <Image src={product.image} alt="Imagem item" />
+        <ProductsFlexContainer>
+            <h2 className="products-subtitle">Produtos</h2>
+            <ProductsGridContainer>
+                {products.map((product, index) => (
+                    <div className="product" key={index}>
+                        <div className="image">
+                            <img src={product.image} alt="Imagem item" />
+                        </div>
+                        <ProductInfo>
+                            <h3>{product.name}</h3>
+                            <p className="color">Cor: {product.color}</p>
+                            <p>Tamanho: {product.size}</p>
+                            <div className="price-div">
+                                <p className="price">R$ {product.price},00</p>
+                            </div>
+                            <div className="add-item-div">
+                                <button onClick={() => addProductIntoCart(product)} className="add-to-cart">Adicionar ao carrinho</button>
+                            </div>
+                        </ProductInfo>
                     </div>
-                    <ProductInfo>
-                        <h3>{product.name}</h3>
-                        <p className="color">Cor: {product.color}</p>
-                        <p>Tamanho: {product.size}</p>
-                        <div className="price-div">
-                            <p className="price">R$ {product.price}</p>
-                        </div>
-                        <div className="add-item-div">
-                            <button onClick={() => addProductIntoCart(product)} className="add-to-cart">Adicionar ao carrinho</button>
-                        </div>
-                    </ProductInfo>
-                </div>
-            ))}
-        </ProductContainer>
+                ))}
+            </ProductsGridContainer>
+        </ProductsFlexContainer>
     )
 }
 
-const ProductContainer = styled.div`
+const ProductsFlexContainer = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
+    .products-subtitle{
+        margin: 15px 0 30px 0;
+        font-weight: 400;
+        font-size: 22px;
+    }
+`
+
+const ProductsGridContainer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
-    // padding: 50px 400px;
-    // @media(max-width: 1904px){
-    //     padding: 50px 300px;
-    // }
-    // @media(max-width: 1688px){
-    //     padding: 50px 200px;
-    // }
-    // @media(max-width: 1480px){
-    //     padding: 50px 100px;
-    // }
-    // @media(max-width: 1280px){
-    //     padding: 50px 0px;
-    // }
+    gap: 20px;
     .product{
         width: 340px;
-        margin: 10px;
     }
     .image{
         background-color: var(--light-purple);
         border-radius: 20px 20px 0 0;
+        height: 340px;
+    }
+    .image img{
+        width: 100%;
+        height: 100%;
+    }
+    
+    @media(max-width: 1080px){
+        .product{
+            width: 240px;
+        }
+        .image{
+            height: 240px;
+        }
+    }
+    @media(max-width: 768px){
+        grid-template-columns: 1fr 1fr;
+    }
+    @media(max-width: 525px){
+        grid-template-columns: 1fr;
+        .product{
+            width: 340px;
+        }
+        .image{
+            height: 340px;
+        }
     }
         
 `
 
-const Image = styled.img`
-    width: 100%;
-`
+
 
 const ProductInfo = styled.div`
     background-color: var(--dark-purple);
     padding: 30px 20px;
+
     .color{
         margin: 20px 0 5px 0;
     }
@@ -103,6 +125,12 @@ const ProductInfo = styled.div`
         transition: 0.1s ease-in-out;
         &:hover{
             background-color: var(--hover-purple);
+        }
+    }
+
+    @media(max-width: 1080px){
+        h3{
+            font-size: 18px;
         }
     }
 `

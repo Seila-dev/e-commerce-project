@@ -67,14 +67,14 @@ export const CartPage = () => {
                                 id="cep"
                                 placeholder="00000-000"
                                 {...register('cep', {
-                                    required: "O cep é obrigatório",
+                                    required: "Informe um cep válido",
                                     pattern: {
                                         value: /^\d{8}$/,
                                         message: "O CEP deve ter exatamente 8 dígitos."
                                     }
                                 })}
                                 />
-                                {errors.cep && <span>{errors.cep.message}</span>}
+                                {errors.cep && <CepErrorMessage>{errors.cep.message}</CepErrorMessage>}
                                 <label htmlFor="country">País</label>
                                 <select 
                                 id="country"
@@ -130,7 +130,7 @@ const Container = styled.div`
     }
     .inside-container{
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
     }
 `
 
@@ -174,12 +174,13 @@ const ProductItem = styled.tr`
 `
 
 const DeliveryContainer = styled.div`
-    background: orange;
+    // background: orange;
     flex-direction: column;
     padding: 10px;
     .delivery-form{
         background: var(--dark-purple);
         display: flex;
+        padding: 10px;
         flex-direction: column;
         input, select{
             width: 300px;
@@ -189,6 +190,17 @@ const DeliveryContainer = styled.div`
             outline: none;
             background: var(--dark-purple);
             color: var(--white);
+        }
+        label{
+            margin-top: 10px;
+        }
+        .save-delivery-btn{
+            background: var(--dark-purple);
+            color: var(--white);
+            padding: 10px;
+            margin: 10px 0;
+            width: 50%;
+            border: 1px solid var(--light-purple);
         }
     }
     .confirm-purchase{
@@ -201,4 +213,9 @@ const DeliveryContainer = styled.div`
         color: var(--white);
         cursor: pointer;
     }
+`
+
+const CepErrorMessage = styled.span`
+    font-size: 12px;
+    margin-top: 5px;
 `

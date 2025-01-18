@@ -1,20 +1,46 @@
 import Logo from '../../assets/logo.png';
-import Cart from '../../assets/cart.png'
+import Cart from '../../assets/cart.png';
+import WhiteMenuIcon from '../../assets/white-menu-icon.png';
+import PersonIcon from '../../assets/person-icon.png'
+import { MenuBurguer } from '../menuburguer';
 
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../../contexts/CartContext';
 
 export const Header = () => {
     const { cart } = useContext(CartContext);
+    const [ openMenu, setOpenMenu ] = useState<boolean>(false);
+
+    const toggleMenu = () => {
+        setOpenMenu(!openMenu);
+    }
+
+    useEffect(() => {
+        if (openMenu) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [openMenu]);
 
     return (
         <>
+        {openMenu && <Overlay onClick={toggleMenu} />}
             <HeaderElement>
-                <LinkLogo to="/">
-                    <img src={Logo} alt="Logo" />
-                </LinkLogo>
+                <div className="align-together">
+                    <div className="menu-btn" onClick={toggleMenu}>
+                        <img src={WhiteMenuIcon} alt="menu icon" />
+                    </div>
+                    <LinkLogo to="/">
+                        <img src={Logo} alt="Logo" />
+                    </LinkLogo>
+                </div>
                 <Nav>
                     <Ul>
                         <Link to="/">
@@ -34,8 +60,13 @@ export const Header = () => {
                         </Link>
                     </Ul>
                     <LoginBtn>
-                        Entrar ou cadastrar-se
+                        <Link to="/login">Entrar ou cadastrar-se</Link>
                     </LoginBtn>
+                    <UserLogin>
+                        <Link to="/">
+                            <img src={PersonIcon} alt="person icon" />
+                        </Link>
+                    </UserLogin>
                     <div className="cart">
                         <Link to="/cart">
                             <img src={Cart} alt="Cart" />
@@ -45,16 +76,34 @@ export const Header = () => {
                         </Link>
                     </div>
                 </Nav>
+                <MenuBurguer active={openMenu} toggleMenu={toggleMenu} />
             </HeaderElement>
         </>
     )
 }
 
+const Overlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 4; 
+    pointer-events: all; 
+`
+
 const HeaderElement = styled.header`
     display: flex;
     padding: 15px 10px;
     justify-content: center;
+    position: relative;
     border-bottom: 1px solid #6528D3;
+    .align-together{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
     .cart {
     position: relative;
     margin-left: 20px;
@@ -79,10 +128,35 @@ const HeaderElement = styled.header`
             font-size: 10px;
         }
     }
+    .menu-btn {
+        display: none;
+    }
+    .menu-btn img{
+        width: 30px;
+        cursor: pointer;
+    }
+
+    @media(max-width: 1080px){
+    justify-content: space-between;
+    padding: 15px 30px;
+        .menu-btn {
+            display: flex;
+        }
+        nav ul{
+            display: none;
+        }
+    }
 `
 
 const LinkLogo = styled(Link)`
-    margin-right: 50px;
+    margin-right: 30px;
+
+    @media(max-width: 768px){
+        margin: 0;
+        img{
+            width: 100px;
+        }
+    }
 `
 
 const Nav = styled.nav`
@@ -118,5 +192,22 @@ const LoginBtn = styled.button`
     transition: 0.1s ease-in-out;
     &:hover{
         background-color: var(--hover-purple);
+    }
+
+    @media(max-width: 768px){
+        display: none;
+    }
+`
+
+const UserLogin = styled.div`
+    border-right: 2px solid var(--light-purple);
+    padding-right: 20px;
+    display: none;
+    img{
+        width: 30px;
+    }
+
+    @media(max-width: 768px){
+        display: flex;
     }
 `

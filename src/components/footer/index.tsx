@@ -26,7 +26,7 @@ export const Footer = () => {
                         </Link>
                     </ul>
                 </div>
-                <div className="divs">
+                <div className="divs second">
                     <h2>Ajuda</h2>
                     <ul>
                         <Link to="/">
@@ -65,7 +65,7 @@ export const Footer = () => {
                 </div>
             </FlexContainer>
             <CopyrightContainer>
-                <p>@2024 - Todos os direitos reservados - Erick Rodrigues</p>
+                <p>@2025 - Todos os direitos reservados - Erick Rodrigues</p>
             </CopyrightContainer>
         </FooterElement>
         </>
@@ -74,7 +74,6 @@ export const Footer = () => {
 
 const FooterElement = styled.footer`
     display: flex;
-    padding: 0px 10px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -83,12 +82,15 @@ const FooterElement = styled.footer`
 
 const FlexContainer = styled.div`
     display: flex;
-    justify-content: space-between;
-    width: 55%;
+    justify-content: center;
+    width: 100%;
     padding: 40px 0;
-    
+
+    .divs.second{
+        margin: 0 200px;
+    }
     li{
-        margin: 15px 0;
+        margin: 10px 0;
         color: var(--light-purple);
         border-bottom: 1px solid var(--dark-purple);
         width: fit-content;
@@ -96,8 +98,34 @@ const FlexContainer = styled.div`
     li: hover{
         border-bottom: 1px solid var(--light-purple);
     }
+
+    ul a{
+        width: fit-content;
+        display: flex;
+    }
     h2{
         font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    @media(max-width: 1080px){
+        .divs.second{
+            margin: 0;
+        }
+        .divs{
+            margin: 0 auto;
+        }
+    }
+
+    @media(max-width: 580px){
+        flex-direction: column;
+        padding: 40px 20px 25px 20px;
+        .divs{
+            margin: 0;
+        }
+        .divs h2{
+            margin-top: 10px;
+        }
     }
 `
 
@@ -107,4 +135,5 @@ const CopyrightContainer = styled.div`
     text-align: center;
     padding: 20px;
     font-size: 15px;
+    font-weight: 300;
 `
