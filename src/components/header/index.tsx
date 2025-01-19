@@ -59,8 +59,8 @@ export const Header = () => {
                             <li>Fale conosco</li>
                         </Link>
                     </Ul>
-                    <LoginBtn>
-                        <Link to="/login">Entrar ou cadastrar-se</Link>
+                    <LoginBtn to="/login">
+                        Entrar ou cadastrar-se
                     </LoginBtn>
                     <UserLogin>
                         <Link to="/">
@@ -181,7 +181,7 @@ const Ul = styled.ul`
     }
 `
 
-const LoginBtn = styled.button`
+const LoginBtn = styled(Link)`
     margin-left: 30px;
     background-color: var(--light-purple);
     color: #fff;
