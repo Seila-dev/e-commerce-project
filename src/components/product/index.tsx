@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ProductData } from "../../interfaces/ProductData";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { Link } from "react-router-dom";
 
 interface ProductProps {
     products: ProductData[];
@@ -17,7 +18,9 @@ export const Product = ({ products }: ProductProps) => {
                 {products.map((product, index) => (
                     <div className="product" key={index}>
                         <div className="image">
+                            <Link to={"/product/" + product.id}>
                             <img src={product.image} alt="Imagem item" />
+                            </Link>
                         </div>
                         <ProductInfo>
                             <h3>{product.name}</h3>

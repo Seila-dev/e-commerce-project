@@ -10,7 +10,17 @@ interface FormData {
 }
 
 export const CartPage = () => {
-    const { cart } = useContext(CartContext);
+    const { cart, productCartDecrement, productCartIncrement, removeProductFromCart } = useContext(CartContext);
+
+    console.log(cart)
+
+    const productsFromCartPrice = () => {
+        cart.map(item => {
+            return item.price
+        })
+    }
+
+    productsFromCartPrice()
 
     const { register, handleSubmit, formState: { errors }} = useForm<FormData>();
 
@@ -25,40 +35,62 @@ export const CartPage = () => {
                 <CartNotFound>Não há compras no carrinho</CartNotFound>
             ) : (
                 <Container>
-                    <h1>Carrinho de compras</h1>
-                    <div className="inside-container">
-                        <TableList>
-                            <tr>
-                                <th>Produto</th>
-                                <th>Descrição</th>
-                                <th>Preço</th>
-                                <th>Quantidade</th>
-                                <th>Total</th>
-                            </tr>
-                            {cart.map((product, index) => (
-                                    <ProductItem key={index}>
-                                        <td>
-                                            <img src={product.image} alt="Imagem item" className="image" />
-                                        </td>
-                                        <td>
-                                            <h3 className="description">{product.name}</h3>
-                                        </td>
-                                        <td>
-                                            <p className="price">R$ {product.price},00</p>
-                                        </td>
-                                        <td>
-                                            <input type="number" className="quantity" value={1} />
-                                        </td>
-                                        <td>
-                                            <p className="price second">R$ {product.price},00</p>
-                                        </td>
-                                        <td>
-                                            <img src={Delete} alt="trash icon" className="trash-icon" />
-                                        </td>
-                                    </ProductItem>
-                            ))}
-                        </TableList>
-                        <DeliveryContainer>
+                    <div>
+                        <h1>Carrinho de compras</h1>
+                    
+                        <div className="inside-container">
+                            <div>
+                                <TableList>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Descrição</th>
+                                    <th>Preço</th>
+                                    <th>Quantidade</th>
+                                    <th>Total</th>
+                                </tr>
+                                {cart.map((product, index) => (
+                                        <ProductItem key={index}>
+                                            <td>
+                                                <img src={product.image} alt="Imagem item" className="image" />
+                                            </td>
+                                            <td>
+                                                <h3 className="description">{product.name}</h3>
+                                            </td>
+                                            <td>
+                                                <p className="price">R$ {product.price},00</p>
+                                            </td>
+                                            <td>
+                                                <div className="change-quantity">
+                                                    <button className="cq-btn decrement" onClick={() => productCartDecrement(product)}>-</button>
+                                                    <p className="quantity">{product.quantity}</p>
+                                                    <button className="cq-btn increment" onClick={() => productCartIncrement(product)}>+</button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p className="price second">R$ {product.price},00</p>
+                                            </td>
+                                            <td>
+                                                <img src={Delete} alt="trash icon" className="trash-icon" onClick={() => removeProductFromCart(product)} />
+                                            </td>
+                                        </ProductItem>
+                                ))}
+                                </TableList>
+                                <CupomSection>
+                                    <div className="label-input">
+                                        <label htmlFor="cupom">Cupom</label>
+                                        <input
+                                        type="text"
+                                        name="cupom"
+                                        id="cupom"
+                                        placeholder="Digite o código"
+                                        />
+                                    </div>
+                                    
+                                    <button className="apply-cupom">Aplicar cupom</button>
+                                </CupomSection>
+                            </div>
+
+                            <DeliveryContainer>
                             <form className="delivery-form" method="POST">
                             <p>Entrega</p>
                                 <label htmlFor="cep">CEP</label>
@@ -86,9 +118,13 @@ export const CartPage = () => {
                                     <option value="argentina">Argentina</option>
                                 </select>
                                 <button type="submit" className="save-delivery-btn" onClick={handleSubmit(onSubmit)}>Atualizar entrega</button>
+                                <div className="purchase-price">
+                                    <p>Subtotal dos pedidos: R$</p>
+                                </div>
                             </form>
                             <button className="confirm-purchase">Finalizar compra</button>
-                        </DeliveryContainer>
+                            </DeliveryContainer>
+                        </div>
                     </div>
                 </Container>
 
@@ -123,14 +159,20 @@ const CartNotFound = styled.p`
 `
 
 const Container = styled.div`
-    padding: 50px 200px 400px 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 50px 0;
+    position: relative;
     h1{
         margin-bottom: 30px;
         font-size: 25px;
     }
     .inside-container{
         display: flex;
-        justify-content: center;
+        // justify-content: center;
     }
 `
 
@@ -151,6 +193,23 @@ const TableList = styled.table`
     td {
         background: var(--dark-purple);
     }
+    .change-quantity{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+    }
+    .change-quantity .cq-btn{
+        width: 30px;
+        height: 30px;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 24px;
+        font-weight: 400;
+        cursor: pointer;
+    }
 `
 
 const ProductItem = styled.tr`
@@ -161,8 +220,18 @@ const ProductItem = styled.tr`
         color: var(--light-purple);
     }
     .quantity{
-        width: 30px;
-        height: 30px;
+        width: 45px;
+        height: 35px;
+        border-radius: 4px;
+        border: 1px solid var(--light-purple);
+        text-align: center;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--dark-purple);
+        color: white;
+        font-weight: 500;
     }
     .price.second{
         color: var(--green);
@@ -170,13 +239,53 @@ const ProductItem = styled.tr`
     }
     .trash-icon{
         width: 25px;
+        cursor: pointer;
+    }
+`
+
+const CupomSection = styled.div`
+    display: flex;
+    margin-top: 30px;
+    align-items: flex-end;
+
+    .label-input{
+        display: flex;
+        flex-direction: column;
+    }
+    label{
+        margin-bottom: 5px;
+    }
+    input{
+        padding: 10px;
+        background: var(--dark-purple); 
+        width: 300px;
+        border: 1px solid var(--light-purple);
+        color: white;
+        border-radius: 4px;
+        margin-right: 40px;
+        outline: none;
+    }
+    input::placeholder{
+        color: var(--light-purple);
+    }
+    .apply-cupom{
+        background: var(--dark-purple);
+        color: var(--white);
+        padding: 10px 50px;
+        border: 2px solid var(--light-purple);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.1s ease-in-out;
+        &:hover{
+            background-color: var(--hover-purple);
+        }
     }
 `
 
 const DeliveryContainer = styled.div`
     // background: orange;
+    margin-left: 20px;
     flex-direction: column;
-    padding: 10px;
     .delivery-form{
         background: var(--dark-purple);
         display: flex;
@@ -191,8 +300,14 @@ const DeliveryContainer = styled.div`
             background: var(--dark-purple);
             color: var(--white);
         }
+        input::placeholder{
+            color: var(--light-purple);
+        }
+        select{
+            cursor: pointer;
+        }
         label{
-            margin-top: 10px;
+            margin: 10px 0 3px 0;
         }
         .save-delivery-btn{
             background: var(--dark-purple);
@@ -201,6 +316,12 @@ const DeliveryContainer = styled.div`
             margin: 10px 0;
             width: 50%;
             border: 1px solid var(--light-purple);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.1s ease-in-out;
+            &:hover{
+                background-color: var(--hover-purple);
+            }
         }
     }
     .confirm-purchase{
@@ -212,6 +333,10 @@ const DeliveryContainer = styled.div`
         background: var(--light-purple);
         color: var(--white);
         cursor: pointer;
+        transition: 0.1s ease-in-out;
+        &:hover{
+            background-color: var(--hover-purple);
+        }
     }
 `
 

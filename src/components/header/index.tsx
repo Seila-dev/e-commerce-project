@@ -63,7 +63,7 @@ export const Header = () => {
                         Entrar ou cadastrar-se
                     </LoginBtn>
                     <UserLogin>
-                        <Link to="/">
+                        <Link to="/login">
                             <img src={PersonIcon} alt="person icon" />
                         </Link>
                     </UserLogin>

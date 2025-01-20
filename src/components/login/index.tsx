@@ -19,11 +19,13 @@ export const Login = () => {
 
     const onSubmitLogin: SubmitHandler<FormDataLogin> = (data) => {
         console.log(data);
+        window.alert('Usuário logado com sucesso.');
         return data;
     };
 
     const onSubmitRegister: SubmitHandler<FormDataRegister> = (data) => {
         console.log(data);
+        window.alert('Usuário cadastrado com sucesso.');
         return data;
     };
 
