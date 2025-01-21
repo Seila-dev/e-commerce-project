@@ -3,6 +3,7 @@ import { CartContext } from "../../contexts/CartContext"
 import styled from "styled-components";
 import Delete from '../../assets/delete.png';
 import { useForm, SubmitHandler } from "react-hook-form";
+import { Products } from "../../contexts/CartContext";
 
 interface FormData {
     cep: string;
@@ -12,15 +13,12 @@ interface FormData {
 export const CartPage = () => {
     const { cart, productCartDecrement, productCartIncrement, removeProductFromCart } = useContext(CartContext);
 
-    console.log(cart)
+    const cartProperty = cart.map((item: Products) => item);
 
-    const productsFromCartPrice = () => {
-        cart.map(item => {
-            return item.price
-        })
-    }
-
-    productsFromCartPrice()
+    const totalPrice = cartProperty.reduce((acumulador, obj) => {
+        return acumulador + obj.price * obj.quantity
+    }, 0);
+    const frete = 10;
 
     const { register, handleSubmit, formState: { errors }} = useForm<FormData>();
 
@@ -119,7 +117,9 @@ export const CartPage = () => {
                                 </select>
                                 <button type="submit" className="save-delivery-btn" onClick={handleSubmit(onSubmit)}>Atualizar entrega</button>
                                 <div className="purchase-price">
-                                    <p>Subtotal dos pedidos: R$</p>
+                                    <p>Subtotal dos pedidos: <span className="t-price">R${totalPrice},00</span></p>
+                                    <p>Frete e manuseio: <span className="t-price">R${frete},00</span></p>
+                                    <p><strong>Total:</strong> <span className="t-price bigger">R${totalPrice + frete},00</span></p>
                                 </div>
                             </form>
                             <button className="confirm-purchase">Finalizar compra</button>
@@ -127,24 +127,6 @@ export const CartPage = () => {
                         </div>
                     </div>
                 </Container>
-
-
-
-                // cart.map((product, index) => (
-                //     <div className="product" key={index}>
-                //         <div className="image">
-                //             <img src={product.image} alt="Imagem item" />
-                //         </div>
-                //         <div className='product-info'>
-                //             <h3>{product.name}</h3>
-                //             <p className="color">Cor: {product.color}</p>
-                //             <p>Tamanho: {product.size}</p>
-                //             <div className="price-div">
-                //                 <p className="price">R$ {product.price}</p>
-                //             </div>
-                //         </div>
-                //     </div>
-                // ))
             )}
         </>
     )
@@ -321,6 +303,25 @@ const DeliveryContainer = styled.div`
             transition: 0.1s ease-in-out;
             &:hover{
                 background-color: var(--hover-purple);
+            }
+        }
+
+        .purchase-price{
+            display: flex;
+            flex-direction: column;
+            margin-right: 50px;
+            p {
+                margin: 20px 0;
+                text-align: end;
+                font-weight: 300;
+            }
+            .t-price{
+                color: var(--green);
+                font-weight: 500;
+                margin-left: 20px;
+            }
+            .t-price.bigger{
+                font-size: 21px;
             }
         }
     }
