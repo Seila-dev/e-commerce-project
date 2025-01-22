@@ -39,39 +39,41 @@ export const CartPage = () => {
                         <div className="inside-container">
                             <div>
                                 <TableList>
-                                <tr>
-                                    <th>Produto</th>
-                                    <th>Descrição</th>
-                                    <th>Preço</th>
-                                    <th>Quantidade</th>
-                                    <th>Total</th>
-                                </tr>
-                                {cart.map((product, index) => (
-                                        <ProductItem key={index}>
-                                            <td>
-                                                <img src={product.image} alt="Imagem item" className="image" />
-                                            </td>
-                                            <td>
-                                                <h3 className="description">{product.name}</h3>
-                                            </td>
-                                            <td>
-                                                <p className="price">R$ {product.price},00</p>
-                                            </td>
-                                            <td>
-                                                <div className="change-quantity">
-                                                    <button className="cq-btn decrement" onClick={() => productCartDecrement(product)}>-</button>
-                                                    <p className="quantity">{product.quantity}</p>
-                                                    <button className="cq-btn increment" onClick={() => productCartIncrement(product)}>+</button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p className="price second">R$ {product.price},00</p>
-                                            </td>
-                                            <td>
-                                                <img src={Delete} alt="trash icon" className="trash-icon" onClick={() => removeProductFromCart(product)} />
-                                            </td>
-                                        </ProductItem>
-                                ))}
+                                <tbody>
+                                    <tr>
+                                        <th className="th-image">Produto</th>
+                                        <th>Descrição</th>
+                                        <th>Preço</th>
+                                        <th>Quantidade</th>
+                                        <th className="th-total">Total</th>
+                                    </tr>
+                                    {cart.map((product, index) => (
+                                            <ProductItem key={index}>
+                                                <td className="td-image">
+                                                    <img src={product.image} alt="Imagem item" className="image" />
+                                                </td>
+                                                <td>
+                                                    <h3 className="description">{product.name}</h3>
+                                                </td>
+                                                <td>
+                                                    <p className="price">R$ {product.price},00</p>
+                                                </td>
+                                                <td>
+                                                    <div className="change-quantity">
+                                                        <button className="cq-btn decrement" onClick={() => productCartDecrement(product)}>-</button>
+                                                        <p className="quantity">{product.quantity}</p>
+                                                        <button className="cq-btn increment" onClick={() => productCartIncrement(product)}>+</button>
+                                                    </div>
+                                                </td>
+                                                <td className="td-price">
+                                                    <p className="price second">R$ {product.price},00</p>
+                                                </td>
+                                                <td>
+                                                    <img src={Delete} alt="trash icon" className="trash-icon" onClick={() => removeProductFromCart(product)} />
+                                                </td>
+                                            </ProductItem>
+                                    ))}
+                                </tbody>
                                 </TableList>
                                 <CupomSection>
                                     <div className="label-input">
@@ -90,32 +92,34 @@ export const CartPage = () => {
 
                             <DeliveryContainer>
                             <form className="delivery-form" method="POST">
-                            <p>Entrega</p>
-                                <label htmlFor="cep">CEP</label>
-                                <input
-                                type="text"
-                                id="cep"
-                                placeholder="00000-000"
-                                {...register('cep', {
-                                    required: "Informe um cep válido",
-                                    pattern: {
-                                        value: /^\d{8}$/,
-                                        message: "O CEP deve ter exatamente 8 dígitos."
-                                    }
-                                })}
-                                />
-                                {errors.cep && <CepErrorMessage>{errors.cep.message}</CepErrorMessage>}
-                                <label htmlFor="country">País</label>
-                                <select 
-                                id="country"
-                                {...register('country')}
-                                >
-                                    <option value="brasil">Brasil</option>
-                                    <option value="usa">USA</option>
-                                    <option value="uk">UK</option>
-                                    <option value="argentina">Argentina</option>
-                                </select>
-                                <button type="submit" className="save-delivery-btn" onClick={handleSubmit(onSubmit)}>Atualizar entrega</button>
+                                <div className="delivery-info">
+                                    <p>Entrega</p>
+                                    <label htmlFor="cep">CEP</label>
+                                    <input
+                                    type="text"
+                                    id="cep"
+                                    placeholder="00000-000"
+                                    {...register('cep', {
+                                        required: "Informe um cep válido",
+                                        pattern: {
+                                            value: /^\d{8}$/,
+                                            message: "O CEP deve ter exatamente 8 dígitos."
+                                        }
+                                    })}
+                                    />
+                                    {errors.cep && <CepErrorMessage>{errors.cep.message}</CepErrorMessage>}
+                                    <label htmlFor="country">País</label>
+                                    <select
+                                    id="country"
+                                    {...register('country')}
+                                    >
+                                        <option value="brasil">Brasil</option>
+                                        <option value="usa">USA</option>
+                                        <option value="uk">UK</option>
+                                        <option value="argentina">Argentina</option>
+                                    </select>
+                                    <button type="submit" className="save-delivery-btn" onClick={handleSubmit(onSubmit)}>Atualizar entrega</button>
+                                </div>
                                 <div className="purchase-price">
                                     <p>Subtotal dos pedidos: <span className="t-price">R${totalPrice},00</span></p>
                                     <p>Frete e manuseio: <span className="t-price">R${frete},00</span></p>
@@ -154,13 +158,24 @@ const Container = styled.div`
     }
     .inside-container{
         display: flex;
+        margin: 0;
         // justify-content: center;
+    }
+
+    @media(max-width: 925px){
+        .inside-container{
+            flex-direction: column;
+        }
+    }
+
+    @media(max-width: 480px){
+        padding: 10px;
     }
 `
 
 const TableList = styled.table`
-    width: 800px;
     max-height: 150px;
+    width: 100%;
     background: var(--light-purple);
     text-align: center;
     border-collapse: collapse;
@@ -175,12 +190,12 @@ const TableList = styled.table`
     td {
         background: var(--dark-purple);
     }
+
     .change-quantity{
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
-
     }
     .change-quantity .cq-btn{
         width: 30px;
@@ -191,6 +206,30 @@ const TableList = styled.table`
         font-size: 24px;
         font-weight: 400;
         cursor: pointer;
+    }
+
+    @media(max-width: 1180px){
+        .th-image{
+            display: none;
+        }
+        .th-total{
+            display: none
+        }
+    }
+
+    @media (max-width: 660px){
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        td {
+            padding: 20px 10px;
+        }
+        th{
+            font-size: 15px;
+        }
+        tr{
+            font-size: 10px;
+        }
     }
 `
 
@@ -223,12 +262,29 @@ const ProductItem = styled.tr`
         width: 25px;
         cursor: pointer;
     }
+
+    @media(max-width: 1180px){
+        .td-image{
+            display: none;
+        }
+        .td-price{
+            display: none;
+        }
+    }
+
+    @media(max-width: 480px){
+        .quantity{
+            width: 20px;
+            height: 25px;
+        }
+    }
 `
 
 const CupomSection = styled.div`
     display: flex;
     margin-top: 30px;
     align-items: flex-end;
+    width: 100%;
 
     .label-input{
         display: flex;
@@ -262,10 +318,29 @@ const CupomSection = styled.div`
             background-color: var(--hover-purple);
         }
     }
+
+    @media(max-width: 925px){
+        justify-content: space-between;
+        margin-bottom: 30px;
+        input{
+            margin: 0 10px 0 0;
+        }
+        .apply-cupom{
+            padding: 10px;
+        }
+    }
+
+    @media(max-width: 660px){
+        input{
+            width: 100%;
+        }
+    }
+
 `
 
 const DeliveryContainer = styled.div`
     // background: orange;
+    display: flex;
     margin-left: 20px;
     flex-direction: column;
     .delivery-form{
@@ -325,10 +400,14 @@ const DeliveryContainer = styled.div`
             }
         }
     }
+    .delivery-info{
+        display: flex;
+        flex-direction: column;
+    }
     .confirm-purchase{
         margin-top: 30px;
         width: 100%;
-        padding: 10px;
+        padding: 15px;
         border-radius: 4px;
         border: none;
         background: var(--light-purple);
@@ -337,6 +416,35 @@ const DeliveryContainer = styled.div`
         transition: 0.1s ease-in-out;
         &:hover{
             background-color: var(--hover-purple);
+        }
+    }
+
+    @media(max-width: 925px){
+        margin: 0;
+        .delivery-form{
+            flex-direction: row;
+            padding: 20px;
+        }
+        .delivery-info{
+            margin-right: 30px;
+        }
+        .delivery-form .purchase-price {
+            margin: 0;
+        }
+    }
+
+    @media(max-width: 660px){
+        .delivery-form{
+            flex-direction: column;
+        }
+        .delivery-form select, .delivery-form input{
+            width: 100%;
+        }
+        .delivery-info{
+            margin: 0;
+        }
+        .delivery-form .purchase-price p {
+            text-align: start;
         }
     }
 `
