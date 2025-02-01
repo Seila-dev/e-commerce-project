@@ -46,16 +46,16 @@ export const Header = () => {
                         <Link to="/">
                             <li>Home</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Sobre</li>
                         </Link>
                         <Link to="/">
                             <li>Produtos</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Perguntas frequentes</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Fale conosco</li>
                         </Link>
                     </Ul>

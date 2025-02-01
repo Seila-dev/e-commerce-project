@@ -12,16 +12,16 @@ export const Footer = () => {
                         <Link to="/">
                             <li>Home</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Sobre</li>
                         </Link>
                         <Link to="/">
                             <li>Produtos</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Perguntas Frequentes</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Fale conosco</li>
                         </Link>
                     </ul>
@@ -29,16 +29,16 @@ export const Footer = () => {
                 <div className="divs second">
                     <h2>Ajuda</h2>
                     <ul>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Trocas e devoluções</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Termos e condições</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Política de privacidade</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Padrão de qualidade</li>
                         </Link>
                     </ul>
@@ -46,19 +46,19 @@ export const Footer = () => {
                 <div className="divs">
                     <h2>Endereço</h2>
                     <ul>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Rua Vale do Silício, 321</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>São Francisco, Califórnia</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>Estados Unidos da América</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>(31) 1234.5678</li>
                         </Link>
-                        <Link to="/">
+                        <Link to="/notfound">
                             <li>vendas@ecommercedd.com</li>
                         </Link>
                     </ul>
