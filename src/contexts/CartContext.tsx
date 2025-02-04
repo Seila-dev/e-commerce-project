@@ -20,12 +20,6 @@ interface CartProviderProps {
     children: React.ReactNode;
 }
 
-// cart[]
-// addProductIntoCart()
-// removeProductFromCart()
-// productCartIncrement()
-// productCartDecrement()
-
 export const CartProvider = ( {children}: CartProviderProps ) => {
     const [ cart, setCart ] = useState<Products[]>([])
 

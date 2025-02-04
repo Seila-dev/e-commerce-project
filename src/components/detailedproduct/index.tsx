@@ -1,12 +1,10 @@
 import { useParams } from "react-router-dom";
 import { ProductData } from "../../interfaces/ProductData";
-import { products } from "../../mocks";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
+import api from "../../services/api";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
-
-//{product} : ProductProps
 
 export const DetailedProduct = () => {
 
@@ -17,12 +15,17 @@ export const DetailedProduct = () => {
     const [ otherProducts, setOtherProducts ] = useState<ProductData[]>([]);
 
     useEffect(() => {
-        const productId = Number(id);
-        const selectedProduct = products.find(product => product.id === productId);
-        setProduct(selectedProduct)
-        const selectedOtherProducts = products.slice(0, 4)
-        setOtherProducts(selectedOtherProducts)
-    }, [id]);
+        async function fetchAsync() {
+            const productId = Number(id);
+            const response = await api.get('/products');
+            const allProducts: ProductData[] = response.data
+            const detailedProduct = allProducts.find(product => product.id === productId)
+            setProduct(detailedProduct)
+            const similarProducts = allProducts.slice(0, 4)
+            setOtherProducts(similarProducts)
+        }
+        fetchAsync()
+    }, [id])
 
     if (!product) {
         return <ProductNotFound>Produto não encontrado</ProductNotFound>; 
@@ -33,12 +36,12 @@ export const DetailedProduct = () => {
         <main>
             <ProductInfoSection>
                 <div className="image-prompt">
-                    <img src={product.image} alt="imagem do produto" />
+                    <img src={"http://localhost:3000/uploads/" + product.image} alt="imagem do produto" />
                 </div>
                 <div className="product-info">
                     <h2 className="name">{product.name}</h2>
-                    <p className="color"><strong>Cor:</strong> {product.color}</p>
-                    <p className="size"><strong>Tamanho:</strong> {product.size}</p>
+                    <p className="color"><strong>Cor:</strong> {product.colors.name}</p>
+                    <p className="size"><strong>Tamanho:</strong> {product.sizes.name}</p>
                     <span className="price">R${product.price},00</span>
                     <p>{product.description}</p>
                     <button className="add-to-cart" onClick={() => addProductIntoCart(product)}>Adicionar ao carrinho</button>
@@ -49,7 +52,7 @@ export const DetailedProduct = () => {
                     <h2>Produtos semelhantes</h2>
                     <div className="flex-container">
                     {otherProducts.map(otherProduct => (
-                        <Link to={'/product/' + otherProduct.id}><img key={otherProduct.id} src={otherProduct.image} alt="Camisa recomendada" /></Link>
+                        <Link to={'/product/' + otherProduct.id}><img key={otherProduct.id} src={"http://localhost:3000/uploads/" + otherProduct.image} alt="Camisa recomendada" /></Link>
                     ))}
                     </div>
                 </div>
@@ -74,6 +77,9 @@ const ProductInfoSection = styled.section`
     justify-content: center;
     margin-top: 10px;
     gap: 3%;
+    .image-prompt{
+        width: 300px;
+    }
     .image-prompt img{
         width: 100%;
         border-radius: 10px;
@@ -86,6 +92,7 @@ const ProductInfoSection = styled.section`
     .product-info .name{
         font-weight: 500;
         font-size: 36px;
+        word-break: break-all;
         margin-bottom: 10px;
         width: 100%;
     }
@@ -112,8 +119,10 @@ const ProductInfoSection = styled.section`
 
     @media(max-width: 768px){
         flex-direction: column;
+        align-items: center;
         .image-prompt{
             text-align: center;
+            width: 100%;
         }
         .image-prompt img{
             width: 400px;

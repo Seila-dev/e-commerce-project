@@ -19,13 +19,13 @@ export const Product = ({ products }: ProductProps) => {
                     <div className="product" key={index}>
                         <div className="image">
                             <Link to={"/product/" + product.id}>
-                            <img src={product.image} alt="Imagem item" />
+                            <img src={"http://localhost:3000/uploads/" + product.image} alt="Imagem item" />
                             </Link>
                         </div>
                         <ProductInfo>
                             <h3>{product.name}</h3>
-                            <p className="color">Cor: {product.color}</p>
-                            <p>Tamanho: {product.size}</p>
+                            <p className="color">Cor: {product.colors.name}</p>
+                            <p>Tamanho: {product.sizes.name}</p>
                             <div className="price-div">
                                 <p className="price">R$ {product.price},00</p>
                             </div>
@@ -92,14 +92,16 @@ const ProductsGridContainer = styled.div`
         
 `
 
-
-
 const ProductInfo = styled.div`
     background-color: var(--dark-purple);
     padding: 30px 20px;
 
+    h3{
+        word-break: break-all;
+        height: 50px;
+    }
     .color{
-        margin: 20px 0 5px 0;
+        margin: 0px 0 5px 0;
     }
     .price-div {
         display: flex;

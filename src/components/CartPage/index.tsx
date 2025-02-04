@@ -50,7 +50,7 @@ export const CartPage = () => {
                                     {cart.map((product, index) => (
                                             <ProductItem key={index}>
                                                 <td className="td-image">
-                                                    <img src={product.image} alt="Imagem item" className="image" />
+                                                    <img src={'http://localhost:3000/uploads/' + product.image} alt="Imagem item" className="image" />
                                                 </td>
                                                 <td>
                                                     <h3 className="description">{product.name}</h3>
