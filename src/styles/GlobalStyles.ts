@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
         --green: #6BB27C;
         --almost-black: #111111;
         --white: #fff;
+        --gray-hover: #6c6f67fc;
     }
 
 
