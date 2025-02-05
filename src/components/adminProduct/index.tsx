@@ -25,7 +25,7 @@ export const Products = ({ products }: ProductProps) => {
                             <p className="price">R$ {product.price},00</p>
                         </div>
                         <div className="view-item-div">
-                            <Link to={'/adminproduct' + product.id}><button className="view-item-btn">Visualizar Produto</button></Link>
+                            <Link to={'/adminproduct/' + product.id}><button className="view-item-btn">Visualizar Produto</button></Link>
                         </div>
                     </ProductInfo>
                 </div>
