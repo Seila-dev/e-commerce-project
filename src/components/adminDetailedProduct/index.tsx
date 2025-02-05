@@ -46,7 +46,7 @@ export const AdminDetailedProduct = () => {
                     <div className="db-info">
                         <p className="datetime">Criado em: {product.created_at}</p>
                         <p className="datetime">Atualizado em: {product.updated_at}</p>
-                        <p className="highlight">Highlight: {product.highlight === true && <span>True</span>} {product.highlight === false && <span>False</span>}</p>
+                        {/* <p className="highlight">Highlight: {product.highlight === true && <span>True</span>} {product.highlight === false && <span>False</span>}</p> */}
                         <p className="ean">ean: 24824247141 (em andamento)</p>
                         <p className="category">Categoria: {product.categories.name}</p>
                     </div>
