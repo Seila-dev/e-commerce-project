@@ -12,6 +12,7 @@ import { CartContext } from '../../contexts/CartContext';
 export const Header = () => {
     const { cart } = useContext(CartContext);
     const [ openMenu, setOpenMenu ] = useState<boolean>(false);
+    const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0 )
 
     const toggleMenu = () => {
         setOpenMenu(!openMenu);
@@ -71,7 +72,7 @@ export const Header = () => {
                         <Link to="/cart">
                             <img src={Cart} alt="Cart" />
                             {cart.length > 0 &&
-                                <div><span className='products-quantity'>{cart.length}</span></div>
+                                <div><span className='products-quantity'>{totalCartItems}</span></div>
                             }
                         </Link>
                     </div>
