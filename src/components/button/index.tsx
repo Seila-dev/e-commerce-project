@@ -1,6 +1,6 @@
 import { ReactNode} from "react"
 import styled from "styled-components"
-import { ProductData } from "../../interfaces/ProductData";
+import { ProductData } from "@/interfaces/ProductData"
 
 interface buttonProps {
     children: ReactNode;

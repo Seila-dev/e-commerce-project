@@ -1,6 +1,6 @@
-import { createContext } from "react";
-import { ProductData } from "../interfaces/ProductData";
-import { useState } from "react";
+import { createContext } from "react"
+import { ProductData } from "@/interfaces/ProductData"
+import { useState } from "react"
 
 export interface Products extends ProductData {
     quantity: number

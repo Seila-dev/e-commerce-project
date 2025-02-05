@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
-import { ProductData } from "../../interfaces/ProductData"
+import { ProductData } from "@/interfaces/ProductData"
 
 interface ProductProps {
     products: ProductData[];

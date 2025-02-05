@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
-import { ProductData } from "../../interfaces/ProductData";
-import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
-import api from "../../services/api";
-import { Link } from "react-router-dom";
-import { CartContext } from "../../contexts/CartContext";
+import { useParams } from "react-router-dom"
+import { ProductData } from "@/interfaces/ProductData"
+import styled from "styled-components"
+import { useContext, useEffect, useState } from "react"
+import api from "@/services/api"
+import { Link } from "react-router-dom"
+import { CartContext } from "@/contexts/CartContext"
 
 export const DetailedProduct = () => {
 
