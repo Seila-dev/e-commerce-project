@@ -7,6 +7,7 @@ import { DetailedProduct } from '../components/detailedproduct'
 import { NotFoundPage } from '../components/notFoundPage'
 import { AdminPage } from '../pages/AdminPage'
 import { Admin } from '../components/admin'
+import { AdminDetailedProduct } from '../components/adminDetailedProduct'
 
 export function AppRoutes() {
     return (
@@ -20,6 +21,7 @@ export function AppRoutes() {
             </Route>
             <Route path="/admin" element={<AdminPage />}>
                 <Route path='/admin' element={<Admin />}/>
+                <Route path='/adminproduct/:id' element={<AdminDetailedProduct />}/>
             </Route>
         </Routes>
     )
