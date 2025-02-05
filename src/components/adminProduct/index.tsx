@@ -13,7 +13,7 @@ export const Products = ({ products }: ProductProps) => {
             {products.map((product, index) => (
                 <div className="product" key={index}>
                     <div className="image">
-                        <Link to={"/productAdmin/" + product.id}>
+                        <Link to={"product/" + product.id}>
                             <img src={"http://localhost:3000/uploads/" + product.image} alt="Imagem item" />
                         </Link>
                     </div>
@@ -25,7 +25,7 @@ export const Products = ({ products }: ProductProps) => {
                             <p className="price">R$ {product.price},00</p>
                         </div>
                         <div className="view-item-div">
-                            <Link to={'/adminproduct/' + product.id}><button className="view-item-btn">Visualizar Produto</button></Link>
+                            <Link to={'product/' + product.id}><button className="view-item-btn">Visualizar Produto</button></Link>
                         </div>
                     </ProductInfo>
                 </div>
