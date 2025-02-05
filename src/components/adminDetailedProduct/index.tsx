@@ -83,7 +83,7 @@ const RedirectHome = styled.div`
         border-radius: 5px;
         transition: 0.15s ease-in-out;
         &:hover{
-            background: #6c6f67fc;
+            background: var(--gray-hover)
         }
     }
     
