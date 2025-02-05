@@ -1,13 +1,13 @@
-import Logo from '../../assets/logo.png';
-import Cart from '../../assets/cart.png';
-import WhiteMenuIcon from '../../assets/white-menu-icon.png';
-import PersonIcon from '../../assets/person-icon.png'
-import { MenuBurguer } from '../menuburguer';
+import Logo from "@/assets/logo.png"
+import Cart from "@/assets/cart.png"
+import WhiteMenuIcon from "@/assets/white-menu-icon.png"
+import PersonIcon from "@/assets/person-icon.png"
+import { MenuBurguer } from "../menuburguer"
 
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../contexts/CartContext';
+import { Link } from "react-router-dom"
+import styled from "styled-components"
+import { useContext, useEffect, useState } from "react"
+import { CartContext } from "@/contexts/CartContext"
 
 export const Header = () => {
     const { cart } = useContext(CartContext);

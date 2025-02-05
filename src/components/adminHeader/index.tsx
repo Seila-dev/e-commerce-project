@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import imagemParaTeste from "../../assets/canecaalt.png"
+import imagemParaTeste from "@/assets/canecaalt.png"
 
 export const Header = () => {
 

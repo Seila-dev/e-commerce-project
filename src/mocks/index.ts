@@ -1,7 +1,7 @@
-import RoupaPreta from '../assets/roupapreta.png';
-import RoupaRoxa from '../assets/rouparoxa.png';
-import Caneca from '../assets/caneca.png';
-import CanecaAlt from '../assets/canecaalt.png';
+import RoupaPreta from "@/assets/roupapreta.png"
+import RoupaRoxa from "@/assets/rouparoxa.png"
+import Caneca from "@/assets/caneca.png"
+import CanecaAlt from "@/assets/canecaalt.png"
 
 export const products = [
     {

@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { Product } from "../product";
-import api from "../../services/api";
-import { useEffect, useState } from "react";
+import styled from "styled-components"
+import { Product } from "../product"
+import api from "@/services/api"
+import { useEffect, useState } from "react"
 
-import { ProductData } from "../../interfaces/ProductData";
+import { ProductData } from "@/interfaces/ProductData"
 
 export const Home = () => {
     const [ product, setProduct ] = useState<ProductData[]>([])

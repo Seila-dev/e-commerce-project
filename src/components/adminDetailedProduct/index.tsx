@@ -1,9 +1,9 @@
-import { Link, useParams } from "react-router-dom";
-import { ProductData } from "../../interfaces/ProductData";
-import styled from "styled-components";
-import { useEffect, useState } from "react";
-import api from "../../services/api";
-import arrow from '../../assets/arrow.png'
+import { Link, useParams } from "react-router-dom"
+import { ProductData } from "@/interfaces/ProductData"
+import styled from "styled-components"
+import { useEffect, useState } from "react"
+import api from "@/services/api"
+import arrow from '@/assets/arrow.png'
 
 export const AdminDetailedProduct = () => {
     const { id } = useParams();

@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { ProductData } from "../../interfaces/ProductData";
-import { useContext } from "react";
-import { CartContext } from "../../contexts/CartContext";
-import { Link } from "react-router-dom";
+import styled from "styled-components"
+import { ProductData } from "@/interfaces/ProductData"
+import { useContext } from "react"
+import { CartContext } from "@/contexts/CartContext"
+import { Link } from "react-router-dom"
 
 interface ProductProps {
     products: ProductData[];

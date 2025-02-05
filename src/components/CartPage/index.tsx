@@ -1,9 +1,9 @@
 import { useContext } from "react"
-import { CartContext } from "../../contexts/CartContext"
-import styled from "styled-components";
-import Delete from '../../assets/delete.png';
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Products } from "../../contexts/CartContext";
+import { CartContext } from "@/contexts/CartContext"
+import styled from "styled-components"
+import Delete from "@/assets/delete.png"
+import { useForm, SubmitHandler } from "react-hook-form"
+import { Products } from "@/contexts/CartContext"
 
 interface FormData {
     cep: string;
