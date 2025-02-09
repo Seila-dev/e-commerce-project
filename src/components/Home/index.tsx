@@ -1,27 +1,28 @@
 import styled from "styled-components"
 import { Product } from "../product"
-import api from "@/services/api"
-import { useEffect, useState } from "react"
+// import api from "@/services/api"
+// import { useEffect, useState } from "react"
+import { products } from "@/mocks"
 
-import { ProductData } from "@/interfaces/ProductData"
+// import { ProductData } from "@/interfaces/ProductData"
 
 export const Home = () => {
-    const [ product, setProduct ] = useState<ProductData[]>([])
+    // const [ product, setProduct ] = useState<ProductData[]>([])
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await api.get('/products');
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         const response = await api.get('/products');
             
-            setProduct(response.data)
-          }
+    //         setProduct(response.data)
+    //       }
           
-          fetchData();
-    }, [])
+    //       fetchData();
+    // }, [])
 
 
     return (
         <Main>
-            <Product products={product}/>
+            <Product products={products}/>
         </Main>
     )
 }

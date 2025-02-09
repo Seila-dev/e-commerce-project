@@ -19,13 +19,14 @@ export const Product = ({ products }: ProductProps) => {
                     <div className="product" key={index}>
                         <div className="image">
                             <Link to={"/product/" + product.id}>
-                            <img src={"http://localhost:3000/uploads/" + product.image} alt="Imagem item" />
+                            {/* <img src={"http://localhost:3000/uploads/" + product.image} alt="Imagem item" /> */}
+                            <img src={product.image} alt="imagem item" />
                             </Link>
                         </div>
                         <ProductInfo>
                             <h3>{product.name}</h3>
-                            <p className="color">Cor: {product.colors.name}</p>
-                            <p>Tamanho: {product.sizes.name}</p>
+                            <p className="color">Cor: {product.colors}</p>
+                            <p>Tamanho: {product.sizes}</p>
                             <div className="price-div">
                                 <p className="price">R$ {product.price},00</p>
                             </div>
