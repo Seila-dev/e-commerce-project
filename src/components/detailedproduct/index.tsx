@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom"
 import { ProductData } from "@/interfaces/ProductData"
 import styled from "styled-components"
 import { useContext, useEffect, useState } from "react"
-// import api from "@/services/api"
-import { products } from "@/mocks"
+import api from "@/services/api"
 import { Link } from "react-router-dom"
 import { CartContext } from "@/contexts/CartContext"
 
@@ -18,9 +17,8 @@ export const DetailedProduct = () => {
     useEffect(() => {
         async function fetchAsync() {
             const productId = Number(id);
-            // const response = await api.get('/products');
-            // const allProducts: ProductData[] = response.data
-            const allProducts: ProductData[] = products
+            const response = await api.get('/products');
+            const allProducts: ProductData[] = response.data
             const detailedProduct = allProducts.find(product => product.id === productId)
             setProduct(detailedProduct)
             const similarProducts = allProducts.slice(0, 4)
@@ -38,13 +36,12 @@ export const DetailedProduct = () => {
         <main>
             <ProductInfoSection>
                 <div className="image-prompt">
-                    {/* <img src={"http://localhost:3000/uploads/" + product.image} alt="imagem do produto" /> */}
-                    <img src={product.image} alt="imagem do produto" />
+                    <img src={"https://e-commerce-project-api-r1x4.onrender.com/uploads/" + product.image} alt="imagem do produto" />
                 </div>
                 <div className="product-info">
                     <h2 className="name">{product.name}</h2>
-                    <p className="color"><strong>Cor:</strong> {product.color}</p>
-                    <p className="size"><strong>Tamanho:</strong> {product.sizes}</p>
+                    <p className="color"><strong>Cor:</strong> {product.colors.name}</p>
+                    <p className="size"><strong>Tamanho:</strong> {product.sizes.name}</p>
                     <span className="price">R${product.price},00</span>
                     <p>{product.description}</p>
                     <button className="add-to-cart" onClick={() => addProductIntoCart(product)}>Adicionar ao carrinho</button>
@@ -55,8 +52,7 @@ export const DetailedProduct = () => {
                     <h2>Produtos semelhantes</h2>
                     <div className="flex-container">
                     {otherProducts.map(otherProduct => (
-                        // <Link to={'/product/' + otherProduct.id}><img key={otherProduct.id} src={"http://localhost:3000/uploads/" + otherProduct.image} alt="Camisa recomendada" /></Link>
-                        <Link to={'/product/' + otherProduct.id}><img key={otherProduct.id} src={otherProduct.image} alt="Camisa recomendada" /></Link>
+                        <Link to={'/product/' + otherProduct.id}><img key={otherProduct.id} src={"https://e-commerce-project-api-r1x4.onrender.com/uploads/" + otherProduct.image} alt="Camisa recomendada" /></Link>
                     ))}
                     </div>
                 </div>

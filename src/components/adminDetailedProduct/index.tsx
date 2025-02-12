@@ -35,12 +35,12 @@ export const AdminDetailedProduct = () => {
             </RedirectHome>
             <ProductInfoSection>
                 <div className="image-prompt">
-                    <img src={"http://localhost:3000/uploads/" + product.image} alt="imagem do produto" />
+                    <img src={"https://e-commerce-project-api-r1x4.onrender.com/uploads/" + product.image} alt="imagem do produto" />
                 </div>
                 <div className="product-info">
                     <h2 className="name">{product.name}</h2>
-                    <p className="color"><strong>Cor:</strong> {product.colors.name}</p>
-                    <p className="size"><strong>Tamanho:</strong> {product.sizes.name}</p>
+                    {/* <p className="color"><strong>Cor:</strong> {product.colors.name}</p>
+                    <p className="size"><strong>Tamanho:</strong> {product.sizes.name}</p> */}
                     <span className="price">R${product.price},00</span>
                     <p>{product.description}</p>
                     <div className="db-info">
@@ -48,7 +48,7 @@ export const AdminDetailedProduct = () => {
                         <p className="datetime">Atualizado em: {product.updated_at}</p>
                         {/* <p className="highlight">Highlight: {product.highlight === true && <span>True</span>} {product.highlight === false && <span>False</span>}</p> */}
                         <p className="ean">ean: 24824247141 (em andamento)</p>
-                        <p className="category">Categoria: {product.categories.name}</p>
+                        {/* <p className="category">Categoria: {product.categories.name}</p> */}
                     </div>
                 </div>
             </ProductInfoSection>

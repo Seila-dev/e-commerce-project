@@ -15,9 +15,9 @@ export interface ProductData {
     name: string;
     image: string;
     color: string;
-    sizes: string;
-    colors: string;
-    categories: string;
+    sizes: Size;
+    colors: Color;
+    categories: Category;
     price: number;
     description: string;
     created_at: string;
