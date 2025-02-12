@@ -4,18 +4,16 @@ import { useEffect, useState } from "react"
 import api from "../../services/api"
 import { useForm } from "react-hook-form";
 import closeIcon from "../../assets/black-close-icon.png"
+import { ProductData } from "@/interfaces/ProductData";
 
 interface Data {
-    id: number;
     name: string;
     image: string;
-    // description: string;
-    // price: number;
-    // category: string;
 }
 
+
 export const Admin = () => {
-    const [ product, setProduct ] = useState<Data[]>([])
+    const [ product, setProduct ] = useState<ProductData[]>([])
     const { register, handleSubmit, formState: { errors } } = useForm<Data>();
     const [updateEvent, setUpdateEvent] = useState<boolean>(false);
     const [imageFile, setImageFile] = useState<File | null>(null);
@@ -50,19 +48,18 @@ export const Admin = () => {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
-            // const imagePath = uploadResponse.data.imagePath;
-
-            // const productData = {
-            //     title: data.title,
-            //     image: imagePath 
-            // };
-
-            // const response = await api.post('/products', productData);
-
-            const newProduct = {
+            const newProduct: ProductData = {
                 id: response.data.id, 
                 name: response.data.name,
                 image: response.data.image,
+                price: response.data.price,
+                description: response.data.description,
+                highlight: response.data.highlight,
+                sizes: response.data.sizes,
+                colors: response.data.colors,
+                created_at: response.data.created_at,
+                updated_at: response.data.updated_at,
+                categories: response.data.categories
             };
 
             // Atualiza a lista de produtos

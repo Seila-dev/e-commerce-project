@@ -14,7 +14,6 @@ export interface ProductData {
     id: number;
     name: string;
     image: string;
-    color: string;
     sizes: Size;
     colors: Color;
     categories: Category;
