@@ -3,7 +3,7 @@ import { ProductData } from "@/interfaces/ProductData"
 import { useContext, useState } from "react"
 import { CartContext } from "@/contexts/CartContext"
 import { Link } from "react-router-dom"
-import closeIcon from "@/assets/white-close-icon.png"
+import { Notification } from "../notification"
 
 interface ProductProps {
     products: ProductData[];
@@ -47,20 +47,7 @@ export const Product = ({ products }: ProductProps) => {
                 ))}
             </ProductsGridContainer>
             {event &&
-                <div className="notification">
-                    <div className="logo">
-                        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Sucesso" />
-                    </div>
-                    <div className="info">
-                        <div className="text">
-                            <h3>Novo Produto</h3>
-                            <p>Produto adicionado com sucesso ao carrinho</p>
-                        </div>
-                        <div className="close-btn">
-                            <img src={closeIcon} alt="close icon" />
-                        </div>
-                    </div>
-                </div>
+                <Notification />
             }
 
         </ProductsFlexContainer>
@@ -82,7 +69,7 @@ const ProductsFlexContainer = styled.div`
         position: fixed;
         display: flex;
         top: 100px;
-        left: 50%;
+        left: 200px;
         z-index: 10;
         border-radius: 10px;
         transform: translateX(-50%);

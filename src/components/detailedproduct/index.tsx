@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import api from "@/services/api"
 import { Link } from "react-router-dom"
 import { CartContext } from "@/contexts/CartContext"
+import { Notification } from "../notification"
 
 export const DetailedProduct = () => {
 
@@ -13,6 +14,15 @@ export const DetailedProduct = () => {
     const { id } = useParams();
     const [ product, setProduct ] = useState<ProductData | undefined>();
     const [ otherProducts, setOtherProducts ] = useState<ProductData[]>([]);
+    const [event, setEvent] = useState<boolean>(false);
+
+    const handleAddItem = () => {
+        if(event) return;
+        setEvent(true);
+        setTimeout(() => {
+            setEvent(false);
+        }, 3100);
+    }
 
     useEffect(() => {
         async function fetchAsync() {
@@ -44,7 +54,7 @@ export const DetailedProduct = () => {
                     <p className="size"><strong>Tamanho:</strong> {product.sizes.name}</p>
                     <span className="price">R${product.price},00</span>
                     <p>{product.description}</p>
-                    <button className="add-to-cart" onClick={() => addProductIntoCart(product)}>Adicionar ao carrinho</button>
+                    <button className="add-to-cart" onClick={() => { addProductIntoCart(product); handleAddItem(); }}>Adicionar ao carrinho</button>
                 </div>
             </ProductInfoSection>
             <SimilarProducts>
@@ -57,8 +67,11 @@ export const DetailedProduct = () => {
                     </div>
                 </div>
                 
+                
             </SimilarProducts>
-            
+            {event &&
+                <Notification />
+            }
         </main>
     )
 }
