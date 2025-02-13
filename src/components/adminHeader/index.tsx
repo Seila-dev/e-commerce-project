@@ -1,8 +1,4 @@
 import styled from "styled-components"
-// import imagemParaTeste from "@/assets/canecaalt.png"
-
-// import arrow from '@/assets/arrow.png'
-
 
 export const AdmHeader = () => {
 
@@ -11,7 +7,6 @@ export const AdmHeader = () => {
 
             <div className="header">
                 <h1>Dashboard</h1>
-                <button className="add-product">Criar Produto</button>
             </div>
             
         </HeaderElement>
@@ -37,13 +32,4 @@ const HeaderElement = styled.header`
         color: white;
         font-weight: 400;
     }
-    .header .add-product{
-        border: none;
-        padding: 5px 10px;
-        background: var(--light-purple);
-        color: white;
-        cursor: pointer;
-        border-radius: 2px;
-    }
-    
 `

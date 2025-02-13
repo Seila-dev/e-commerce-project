@@ -1,6 +1,6 @@
 import logo from '@/assets/logo.png'
 import homeLogo from '@/assets/home-icon.png'
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const AdmNavigation = () => {
@@ -17,11 +17,12 @@ export const AdmNavigation = () => {
                 </div>
                 <nav className="flex-container">
                     <ul>
-                        <li>Dashboard</li>
-                        <li>Produtos</li>
-                        <li>Categorias</li>
-                        <li>Cores</li>
-                        <li>Tamanhos</li>
+                        <Link to="/admin"><li>Dashboard</li></Link> 
+                        {/* Fazer página de administração principal de forma bonita, bom design, para atrair clientes */}
+                        <Link to="/admin"><li>Produtos</li></Link>
+                        <Link to="/admin/categories"><li>Categorias</li></Link>
+                        <Link to="/admin/colors"><li>Cores</li></Link>
+                        <Link to="/admin/sizes"><li>Tamanhos</li></  Link>
                     </ul>
                 </nav>
             </Aside>
@@ -29,7 +30,7 @@ export const AdmNavigation = () => {
 }
 
 const Aside = styled.aside`
-    background: black;
+    background: var(--dark-purple);
     width: 250px;
     padding: 10px;
     display: flex;
@@ -66,7 +67,7 @@ const Aside = styled.aside`
         cursor: pointer;
         border-radius: 5px;
         &:hover{
-            background: #686e6c;
+            background: var(--light-purple);
         }
     }
 `

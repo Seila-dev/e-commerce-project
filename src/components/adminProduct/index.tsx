@@ -31,10 +31,10 @@ export const Products = ({ products }: ProductProps) => {
                             </div>
                         </div>
                         {product.highlight === false && <p>Em Destaque: Não</p>}
-                        <p>Cor: {product.colors.name}</p>
-                        <p>Tamanho: {product.sizes.name}</p>
-                        <p>Categoria: {product.categories.name}</p>
-                        <p>Ean: {product.ean}</p>
+                        <p>Cor: <i>{product.colors.name}</i></p>
+                        <p>Tamanho: <i>{product.sizes.name}</i></p>
+                        <p>Categoria: <i>{product.categories.name}</i></p>
+                        <p>Ean: <i>{product.ean}</i></p>
 
                     </ProductResponsive>
                 ))
@@ -122,6 +122,7 @@ const Product = styled.tr`
         text-align: center;
         padding: 5px 10px;   
         border-spacing: 0;
+        font-style: italic;
     }
     h3 {
         font-size: 15px;
@@ -156,8 +157,8 @@ const Product = styled.tr`
 const ProductResponsive = styled.div`
     display: flex;
     flex-direction: column;
-    // background: var(--almost-black);
-    background: #292929;
+    // background: #292929;
+    background: linear-gradient(to bottom, #292929, var(--almost-black));
     margin: 10px;
     border-radius: 5px;
     padding: 15px;
