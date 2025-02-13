@@ -22,5 +22,6 @@ export interface ProductData {
     created_at: string;
     updated_at: string;
     highlight: boolean;
+    ean: string;
 }
 
