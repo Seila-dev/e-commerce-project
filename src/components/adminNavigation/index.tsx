@@ -18,7 +18,7 @@ export const AdmNavigation = () => {
                 <nav className="flex-container">
                     <ul>
                         <Link to="/admin"><li>Dashboard</li></Link> 
-                        {/* Fazer página de administração principal de forma bonita, bom design, para atrair clientes */}
+                        {/* Fazer página de administração principal de forma bonita, bom design, para atrair clientes (depois)*/}
                         <Link to="/admin"><li>Produtos</li></Link>
                         <Link to="/admin/categories"><li>Categorias</li></Link>
                         <Link to="/admin/colors"><li>Cores</li></Link>

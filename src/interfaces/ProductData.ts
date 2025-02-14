@@ -1,12 +1,20 @@
 export interface Size {
+    id: number;
     name: string;
 }
 
 export interface Color {
+    id: number;
     name: string;
 }
 
 export interface Category {
+    id: number;
+    name: string;
+}
+
+export interface Item {
+    id: number;
     name: string;
 }
 
