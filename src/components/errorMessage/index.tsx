@@ -13,4 +13,5 @@ export const ErrorMessage = (props: { children?: ReactNode }) => {
 const ErrorElement = styled.p`
     color: red;
     font-size: 12px;
+    margin-top: 4px;
 `

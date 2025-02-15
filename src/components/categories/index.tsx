@@ -6,7 +6,7 @@ import { Category } from "@/interfaces/ProductData"
 import api from "@/services/api"
 import { Loading } from "../loading"
 import { useForm } from "react-hook-form"
-import closeIcon from '@/assets/close.png'
+import closeIcon from '@/assets/white-close-icon.png'
 import { ErrorMessage } from "../errorMessage"
 
 interface Data {
@@ -15,11 +15,12 @@ interface Data {
 }
 
 export const CategoriesSection = () => {
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm<Data>();
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm<Data>()
     const [categories, setCategories] = useState<Category[]>([])
     const [loading, setLoading] = useState<boolean>(true)
-    const [updateEvent, setUpdateEvent] = useState<boolean>(false);
-    const [editingCategory, setEditingCategory] = useState<Category | null>(null);
+    const [updateEvent, setUpdateEvent] = useState<boolean>(false)
+    const [addEvent, setAddEvent] = useState<boolean>(false)
+    const [editing, setEditing] = useState<Category | null>(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,6 +32,25 @@ export const CategoriesSection = () => {
         fetchData()
     }, [])
 
+    const handleCreate = async (data: Data) => {
+        try {
+            setLoading(true)
+            const response = await api.post('/categories', { name: data.name })
+
+            if (response && response.data) {
+                setCategories(prev => [...prev, response.data])
+                setAddEvent(false)
+            } else {
+                throw new Error("Dados inesperados da API")
+            }
+
+            setLoading(false)
+        } catch (error) {
+            console.log("Error on creating the item", error)
+            setLoading(false)
+        }
+    }
+
     const handleDelete = async (productId: number) => {
         try {
             setLoading(true)
@@ -38,25 +58,25 @@ export const CategoriesSection = () => {
             setCategories(prev => prev.filter(item => item.id !== productId))
             setLoading(false)
         } catch (error) {
-            console.log("Erro ao deletar o produto", error)
+            console.log("Erro on deleting the item", error)
             setLoading(false)
         }
     }
 
     const handleEdit = (category: Category) => {
-        setEditingCategory(category)
+        setEditing(category)
         setValue("name", category.name)
         setUpdateEvent(true)
     }
 
     const submitEdit = async (data: Data) => {
-        if (editingCategory) {
+        if (editing) {
             try {
-                await api.put(`/categories/${editingCategory.id}`, { name: data.name })
-                setCategories(prev => prev.map(item => item.id === editingCategory.id ? { ...item, name: data.name } : item))
+                await api.put(`/categories/${editing.id}`, { name: data.name })
+                setCategories(prev => prev.map(item => item.id === editing.id ? { ...item, name: data.name } : item))
                 setUpdateEvent(false)
             } catch (error) {
-                console.log("Erro ao enviar categoria", error)
+                console.log("Error on sending the category", error)
             }
         }
     }
@@ -69,20 +89,21 @@ export const CategoriesSection = () => {
             <AdmHeader />
             <div className="section">
                 <div className="header">
-                    <h1>Categories Section</h1>
-                    <button className="create-item">Criar item</button>
+                    <h1>Colors Section</h1>
+                    <button className="create-item" onClick={() => setAddEvent(true)}>Criar item</button>
                 </div>
-                <ProductItems item={categories} onDelete={handleDelete} onEdit={handleEdit} />
+                <ProductItems item={categories} onDelete={handleDelete} onEdit={handleEdit}/>
             </div>
-            {updateEvent &&
-                <Lightbox onSubmit={handleSubmit(submitEdit)}>
+
+            {(updateEvent || addEvent) &&
+                <Lightbox onSubmit={handleSubmit(updateEvent ? submitEdit : handleCreate)}>
                     <div className="white-box">
                         <div className="close-container">
-                            <h3>Editar Item</h3>
-                            <img src={closeIcon} alt="Close icon" onClick={() => setUpdateEvent(false)} />
+                            <h3>{addEvent ? 'Criar item' : updateEvent ? 'Editar item ' : ''}</h3>
+                            <img src={closeIcon} alt="Close icon" onClick={() => {setUpdateEvent(false); setAddEvent(false)}} />
                         </div>
 
-                        <label htmlFor="text">Nome *</label>
+                        <label htmlFor="text">NOME *</label>
                         <input
                             type="text"
                             id="name"
@@ -91,8 +112,10 @@ export const CategoriesSection = () => {
                             {...register("name", { required: true })}
                         />
                         {errors.name && <ErrorMessage>é necessário escrever algo aqui</ErrorMessage>}
-                        <button type="submit" className="save-btn">Salvar alterações</button>
-
+                        <div className="footer">
+                            <button className="cancel-btn btn" onClick={() => {setUpdateEvent(false); setAddEvent(false)}}>Cancelar</button>
+                            <button type="submit" className="save-btn btn" disabled={loading}>Salvar</button>
+                        </div>
                     </div>
                 </Lightbox>
             }
@@ -126,10 +149,8 @@ const Main = styled.main`
         transition: 0.15s ease-out;
         &:hover{
         background: var(--hover-purple);
+        }
     }
-    }
-    
-
 `
 
 const Lightbox = styled.form`
@@ -143,13 +164,15 @@ const Lightbox = styled.form`
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
     .white-box{
-        background: white;
+        background: var(--almost-black);
         display: flex;
         flex-direction: column;
         width: 500px;
         height: 500px;
         padding: 20px;
         margin: 10px;
+        border: 1px solid var(--light-purple);
+        border-radius: 10px;
     }
     .white-box .close-container{
         display: flex;
@@ -162,25 +185,41 @@ const Lightbox = styled.form`
     }
     .white-box label{
         margin: 5px 0;
+        font-weight: 700;
+        font-size: 14px;
     }
     .white-box input, textarea{
         padding: 10px;
         outline: none;
         border-radius: 5px;
-        border: 1px solid #ccc;
-        color: black;
+        background: black;
+        border: 1px solid var(--light-purple);
+        color: #ccc;
     }
-    .white-box .save-btn{
-        margin-top: 20px;
-        padding: 10px;
+    .white-box .footer{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: auto;
+    }    
+    .white-box .btn{
+        padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        background: #ccc;
+        background: transparent;
+        color: #fff;
+        opacity: 0.8;
+        transition: 0.15s ease-in;
+    }
+    .white-box .btn.save-btn{
+        background: var(--light-purple);
+        &:hover{
+            background: var(--hover-purple);
+        }
     }
 
     label, h3{
-        color: black;
+        color: #ccc;
     }
 
 `
