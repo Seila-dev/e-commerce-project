@@ -1,9 +1,12 @@
 import logo from '@/assets/logo.png'
 import homeLogo from '@/assets/home-icon.png'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
+// import { useState } from 'react'
 
 export const AdmNavigation = () => {
+
+    const location = useLocation()
 
     return (
         <Aside>
@@ -17,11 +20,42 @@ export const AdmNavigation = () => {
                 </div>
                 <nav className="flex-container">
                     <ul>
-                        <Link to="/admin"><li>Dashboard</li></Link> 
-                        <Link to="/admin"><li>Produtos</li></Link>
-                        <Link to="/admin/categories"><li>Categorias</li></Link>
-                        <Link to="/admin/colors"><li>Cores</li></Link>
-                        <Link to="/admin/sizes"><li>Tamanhos</li></Link>
+                        <Link to="/admin">
+                        {/* <li
+                            onClick={() => handleClick('/admin')}
+                            className={activeItem === '/admin' ? 'active' : ''}
+                        >
+                            Dashboard
+                        </li> */}
+                        </Link> 
+                        <Link to="/admin">
+                        <li
+                            className={location.pathname === '/admin' ? 'active' : ''}
+                        >
+                            Produtos
+                        </li>
+                        </Link> 
+                        <Link to="/admin/categories">
+                        <li
+                            className={location.pathname === '/admin/categories' ? 'active' : ''}
+                        >
+                            Categorias
+                        </li>
+                        </Link> 
+                        <Link to="/admin/colors">
+                        <li
+                            className={location.pathname === '/admin/colors' ? 'active' : ''}
+                        >
+                            Cores
+                        </li>
+                        </Link> 
+                        <Link to="/admin/sizes">
+                        <li
+                            className={location.pathname === '/admin/sizes' ? 'active' : ''}
+                        >
+                            Tamanhos
+                        </li>
+                        </Link> 
                     </ul>
                 </nav>
             </Aside>
@@ -65,8 +99,12 @@ const Aside = styled.aside`
         transition: 0.15s ease-in;
         cursor: pointer;
         border-radius: 5px;
+        margin: 5px 0;
         &:hover{
             background: var(--light-purple);
         }
+    }
+    .flex-container ul li.active {
+        background: var(--light-purple);
     }
 `
