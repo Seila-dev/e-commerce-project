@@ -57,15 +57,20 @@ const ItemContainer = styled.div`
         display: flex;
         background: var(--dark-purple);
         background: linear-gradient(90deg, #02244b 0%, #232631 40%);
-
         margin: 15px 15px 10px 0;
         justify-content: space-between;
         padding: 10px;
         width: 400px;
         border-radius: 5px;
-        height: 100px;
+        min-height: 100px;
         transition: 0.35s ease-in-out;
         position: relative;
+    }
+    .item .info{
+        height: 100%;
+    }
+    .item .info .name{
+        word-break: break-word;
     }
     .item .info .id{
         margin-top: 5px;
