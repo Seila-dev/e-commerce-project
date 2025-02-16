@@ -186,7 +186,7 @@ const ProductInfo = styled.div`
         font-size: 24px;
         color: var(--green);
         font-weight: 500;
-        break-word: break-all;
+        word-break: break-all;
     }
     
     .add-item-div{
