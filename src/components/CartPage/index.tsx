@@ -189,6 +189,7 @@ const TableList = styled.table`
 
     td {
         background: var(--dark-purple);
+        word-break: break-word;
     }
 
     .change-quantity{
