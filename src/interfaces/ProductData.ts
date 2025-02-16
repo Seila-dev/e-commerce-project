@@ -29,7 +29,9 @@ export interface ProductData {
     description: string;
     created_at: string;
     updated_at: string;
-    highlight: boolean;
+    highlight?: boolean;
+    discount?: number;
+    rating?: number;
     ean: string;
 }
 

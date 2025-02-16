@@ -31,6 +31,7 @@ export const Products = ({ products }: ProductProps) => {
                             </div>
                         </div>
                         {product.highlight === false && <p>Em Destaque: Não</p>}
+                        {product.highlight === true && <p>Em Destaque: Sim</p>}
                         <p>Cor: <i>{product.colors.name}</i></p>
                         <p>Tamanho: <i>{product.sizes.name}</i></p>
                         <p>Categoria: <i>{product.categories.name}</i></p>
@@ -70,7 +71,8 @@ export const Products = ({ products }: ProductProps) => {
                                     <p>R${product.price},00</p>
                                 </td>
                                 <td>
-                                    {product.highlight === false && <p>Não</p>}
+                                    {product.highlight === false && <p>Sim</p>}
+                                    {product.highlight === true && <p>Não</p>}
                                 </td>
                                 <td>
                                     <p>{product.colors.name}</p>

@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
         color: #fff;
     }
 
-    button {
+    button, textarea {
         font-family: "Roboto", sans-serif;
     }
 `
