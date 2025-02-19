@@ -8,9 +8,12 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { useContext, useEffect, useState } from "react"
 import { CartContext } from "@/contexts/CartContext"
+import { AuthContext } from "@/contexts/AuthContext"
 
 export const Header = () => {
     const { cart } = useContext(CartContext);
+    const { isAuthenticated } = useContext(AuthContext)
+
     const [ openMenu, setOpenMenu ] = useState<boolean>(false);
     const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0 )
 
@@ -31,56 +34,62 @@ export const Header = () => {
     }, [openMenu]);
 
     return (
-        <>
+      <>
         {openMenu && <Overlay onClick={toggleMenu} />}
-            <HeaderElement>
-                <div className="align-together">
-                    <div className="menu-btn" onClick={toggleMenu}>
-                        <img src={WhiteMenuIcon} alt="menu icon" />
-                    </div>
-                    <LinkLogo to="/">
-                        <img src={Logo} alt="Logo" />
-                    </LinkLogo>
-                </div>
-                <Nav>
-                    <Ul>
-                        <Link to="/">
-                            <li>Home</li>
-                        </Link>
-                        <Link to="/notfound">
-                            <li>Sobre</li>
-                        </Link>
-                        <Link to="/">
-                            <li>Produtos</li>
-                        </Link>
-                        <Link to="/notfound">
-                            <li>Perguntas frequentes</li>
-                        </Link>
-                        <Link to="/notfound">
-                            <li>Fale conosco</li>
-                        </Link>
-                    </Ul>
-                    <LoginBtn to="/login">
-                        Entrar ou cadastrar-se
-                    </LoginBtn>
-                    <UserLogin>
-                        <Link to="/login">
-                            <img src={PersonIcon} alt="person icon" />
-                        </Link>
-                    </UserLogin>
-                    <div className="cart">
-                        <Link to="/cart">
-                            <img src={Cart} alt="Cart" />
-                            {cart.length > 0 &&
-                                <div><span className='products-quantity'>{totalCartItems}</span></div>
-                            }
-                        </Link>
-                    </div>
-                </Nav>
-                <MenuBurguer active={openMenu} toggleMenu={toggleMenu} />
-            </HeaderElement>
-        </>
-    )
+        <HeaderElement>
+          <div className="align-together">
+            <div className="menu-btn" onClick={toggleMenu}>
+              <img src={WhiteMenuIcon} alt="menu icon" />
+            </div>
+            <LinkLogo to="/">
+              <img src={Logo} alt="Logo" />
+            </LinkLogo>
+          </div>
+          <Nav>
+            <Ul>
+              <Link to="/">
+                <li>Home</li>
+              </Link>
+              <Link to="/notfound">
+                <li>Sobre</li>
+              </Link>
+              <Link to="/">
+                <li>Produtos</li>
+              </Link>
+              <Link to="/notfound">
+                <li>Perguntas frequentes</li>
+              </Link>
+              <Link to="/notfound">
+                <li>Fale conosco</li>
+              </Link>
+            </Ul>
+            {!isAuthenticated && (
+              <LoginBtn to="/login">Entrar ou cadastrar-se</LoginBtn>
+            )}
+
+            {isAuthenticated && (
+              <UserLogin>
+                <Link to="/login">
+                  <img src={PersonIcon} alt="person icon" />
+                </Link>
+              </UserLogin>
+            )}
+
+            <div className="cart">
+              <Link to="/cart">
+                <img src={Cart} alt="Cart" />
+                {cart.length > 0 && (
+                  <div>
+                    <span className="products-quantity">{totalCartItems}</span>
+                  </div>
+                )}
+              </Link>
+            </div>
+          </Nav>
+          <MenuBurguer active={openMenu} toggleMenu={toggleMenu} />
+        </HeaderElement>
+      </>
+    );
 }
 
 const Overlay = styled.div`
