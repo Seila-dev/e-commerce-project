@@ -32,7 +32,6 @@ export const Login = () => {
     register,
     handleSubmit,
     reset,
-    setError,
     formState: { errors, isSubmitting },
   } = useForm<signInUserFormData>({
     mode: 'onBlur',

@@ -89,7 +89,7 @@ export const SizesSection = () => {
             <AdmHeader />
             <div className="section">
                 <div className="header">
-                    <h1>Colors Section</h1>
+                    <h1>Sizes Section</h1>
                     <button className="create-item" onClick={() => setAddEvent(true)}>Criar item</button>
                 </div>
                 <ProductItems item={sizes} onDelete={handleDelete} onEdit={handleEdit}/>

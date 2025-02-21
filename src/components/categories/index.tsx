@@ -89,12 +89,11 @@ export const CategoriesSection = () => {
             <AdmHeader />
             <div className="section">
                 <div className="header">
-                    <h1>Colors Section</h1>
+                    <h1>Category Section</h1>
                     <button className="create-item" onClick={() => setAddEvent(true)}>Criar item</button>
                 </div>
                 <ProductItems item={categories} onDelete={handleDelete} onEdit={handleEdit}/>
             </div>
-
             {(updateEvent || addEvent) &&
                 <Lightbox onSubmit={handleSubmit(updateEvent ? submitEdit : handleCreate)}>
                     <div className="white-box">
