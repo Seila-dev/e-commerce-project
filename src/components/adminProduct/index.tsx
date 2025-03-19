@@ -16,6 +16,10 @@ export const Products = ({ products }: ProductProps) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    function transformPtbr(value: string){
+        return new Date(`${value}`).toLocaleDateString("pt-BR")
+    }
+
     return (
         <ProductElement>
             {windowWidth <= 950 ? (
@@ -36,6 +40,9 @@ export const Products = ({ products }: ProductProps) => {
                         <p>Tamanho: <i>{product.sizes.name}</i></p>
                         <p>Categoria: <i>{product.categories.name}</i></p>
                         <p>Ean: <i>{product.ean}</i></p>
+                        <p>Criado em: <i>{product.createdAt}</i></p>
+                        <p>Avaliação: <i>{product.rating}/10</i></p>
+                        <p>Desconto: <i>{product.discount}%</i></p>
 
                     </ProductResponsive>
                 ))
@@ -51,6 +58,9 @@ export const Products = ({ products }: ProductProps) => {
                             <th>Tamanho</th>
                             <th>Categoria</th>
                             <th>Ean</th>
+                            <th>Criado em</th>
+                            <th>Avaliação</th>
+                            <th>Desconto</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,6 +95,15 @@ export const Products = ({ products }: ProductProps) => {
                                 </td>
                                 <td>
                                     <p>{product.ean}</p>
+                                </td>
+                                <td>
+                                    <p>{transformPtbr(product.createdAt)}</p>
+                                </td>
+                                <td>
+                                    <p>{product.rating}/10</p>
+                                </td>
+                                <td>
+                                    <p>{product.discount}%</p>
                                 </td>
                                 <td>
                                 <button className='edit-btn'><img src={editIcon} alt="Edit Icon" /></button>
@@ -154,6 +173,7 @@ const Product = styled.tr`
         display: flex;
         flex-direction: column;
     }
+
 `;
 
 const ProductResponsive = styled.div`
@@ -191,5 +211,11 @@ const ProductResponsive = styled.div`
     }
     p{
         margin: 10px 0;
+    }
+    @media(max-width: 400px) {
+        .product-header .align button{
+            width: 100%;
+            padding: 5px 0;
+        }
     }
 `

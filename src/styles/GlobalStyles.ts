@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
         background: var(--almost-black);
         color: #ffffff;
         font-family: "Roboto", sans-serif;
-        min-width: 380px;
+        min-width: 320px;
     }
 
     a{

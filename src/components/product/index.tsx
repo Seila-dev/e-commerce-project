@@ -35,7 +35,7 @@ export const Product = ({ products }: ProductProps) => {
                         <ProductInfo>
                             <h3>{product.name}</h3>
                             <p className="color">Cor: {product.colors.name}</p>
-                            <p>Tamanho: {product.sizes.name}</p>
+                            <p className="size">Tamanho: {product.sizes.name}</p>
                             <div className="price-div">
                                 <p className="price">R$ {product.price},00</p>
                             </div>
@@ -135,12 +135,14 @@ const ProductsGridContainer = styled.div`
     }
     .image{
         background-color: var(--light-purple);
-        border-radius: 20px 20px 0 0;
+        border-radius: 10px 10px 0 0;
         height: 340px;
+        overflow: hidden;
     }
     .image img{
         width: 100%;
         height: 100%;
+    
     }
     
     @media(max-width: 1080px){
@@ -171,11 +173,14 @@ const ProductInfo = styled.div`
     padding: 30px 20px;
 
     h3{
-        word-break: break-all;
-        height: 50px;
+        margin-bottom: 20px;
+        font-size: 16px;
     }
     .color{
         margin: 0px 0 5px 0;
+    }
+    .color, .size{
+        font-size: 14px;
     }
     .price-div {
         display: flex;

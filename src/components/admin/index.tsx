@@ -60,6 +60,8 @@ export const Admin = () => {
         fetchDataAPI('/colors', setColors)
         fetchDataAPI('/sizes', setSizes)
 
+        console.log('me cagei')
+
     }, [])
 
     const handleSubmitForm = async (data: Data) => {
@@ -75,7 +77,9 @@ export const Admin = () => {
             formData.append("ean", String(data.ean));
             formData.append("categoryId", String(data.categoryId));  
             formData.append("sizeId", String(data.sizeId));
-            formData.append("colorId", String(data.colorId));  
+            formData.append("colorId", String(data.colorId));
+            formData.append("rating", String(data.rating))  
+            formData.append("discount", String(data.discount))
             
             if (imageFile) {
                 formData.append("file", imageFile);
@@ -357,7 +361,11 @@ const Section = styled.section`
     padding: 10px;
     border-radius: 5px;
     height: 580px;
+    max-width: 800px;
+    width: 100%;
+    margin: 10px; 
     overflow-y: scroll; 
+    overflow-x: scroll;
     &::-webkit-scrollbar {
         width: 10px;
         background: transparent;
@@ -370,7 +378,8 @@ const Section = styled.section`
     .header{
         margin-bottom: 30px;
         display: flex;
-        justify-content: space-between;
+        gap: 20px;
+        justify-content: flex-start;
         align-items: center;
     }
     .header input, .header button{

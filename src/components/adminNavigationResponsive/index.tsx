@@ -5,13 +5,22 @@ import styled from 'styled-components'
 import closeIcon from '@/assets/white-close-icon.png'
 // import { useState } from 'react'
 
-export const AdmNavigation = () => {
+interface NavigationProps {
+    activeBurguer: boolean;
+    changeBurguerState: () => void;
+}
+
+export const AdmNavigationResponsive = ({ activeBurguer, changeBurguerState }: NavigationProps) => {
+
+    //etapas
+    //1: desabilitar o menu usando Transform após chegar em media 550px
+    //2: habilitar o menu clicando no menu icon 
 
     const location = useLocation()
     
 
     return (
-        <Aside >
+        <Aside activeBurguer={activeBurguer}>
                 <div className="menu-header">
                     <img src={logo} alt="logo" className="logo" />
                     <Link to="/admin" className='home-link'>
@@ -19,7 +28,7 @@ export const AdmNavigation = () => {
                             <img src={homeLogo} alt="Home logo" />
                         </div>
                     </Link>
-                    <img src={closeIcon} alt="close icon" className='close-icon'/>
+                    <img src={closeIcon} alt="close icon" className='close-icon' onClick={changeBurguerState}/>
                 </div>
                 <nav className="flex-container">
                     <ul>
@@ -65,15 +74,16 @@ export const AdmNavigation = () => {
     )
 }
 
-const Aside = styled.aside`
+const Aside = styled.aside<{activeBurguer: boolean}>`
     background: var(--dark-purple);
     width: 250px;
     padding: 10px;
-    display: flex;
+    display: none;
     flex-direction: column;
     height: auto;
     min-height: 100vh;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transform: translateX(${props => (props.activeBurguer ? '-100%' : '0')});
     transition: 0.25s ease-out;
     .menu-header{
         display: flex;
@@ -121,8 +131,8 @@ const Aside = styled.aside`
         // transform: translateX(-150%);
         position: absolute;
         width: 100%;
+        display: flex;
         height: 100%;
-        display: none;
         z-index: 10;
         transition: 0.25s ease-out;
         
