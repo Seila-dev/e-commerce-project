@@ -60,8 +60,6 @@ export const Admin = () => {
         fetchDataAPI('/colors', setColors)
         fetchDataAPI('/sizes', setSizes)
 
-        console.log('me cagei')
-
     }, [])
 
     const handleSubmitForm = async (data: Data) => {

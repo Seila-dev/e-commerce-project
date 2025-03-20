@@ -40,7 +40,7 @@ export const Products = ({ products }: ProductProps) => {
                         <p>Tamanho: <i>{product.sizes.name}</i></p>
                         <p>Categoria: <i>{product.categories.name}</i></p>
                         <p>Ean: <i>{product.ean}</i></p>
-                        <p>Criado em: <i>{transformPtbr(product.created_at)}</i></p>
+                        <p>Criado em: <i>{transformPtbr(product.createdAt)}</i></p>
                         <p>Avaliação: <i>{product.rating}/10</i></p>
                         <p>Desconto: <i>{product.discount}%</i></p>
 
@@ -97,7 +97,7 @@ export const Products = ({ products }: ProductProps) => {
                                     <p>{product.ean}</p>
                                 </td>
                                 <td>
-                                    <p>{transformPtbr(product.created_at)}</p>
+                                    <p>{transformPtbr(product.createdAt)}</p>
                                 </td>
                                 <td>
                                     <p>{product.rating}/10</p>
