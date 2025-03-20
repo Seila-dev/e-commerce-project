@@ -27,8 +27,8 @@ export interface ProductData {
     categories: Category;
     price: number;
     description: string;
-    createdAt: string;
-    updatedAt: string;
+    created_at: string;
+    updated_at: string;
     highlight?: boolean;
     discount?: number;
     rating?: number;
